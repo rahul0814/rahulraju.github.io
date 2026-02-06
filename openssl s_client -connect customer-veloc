@@ -1,0 +1,2 @@
+openssl s_client -connect customer-velocity-51782--full.sandbox.my.salesforce.com:443 \
+-cert my_client.pem -key my_client.key -CAfile truststore.pem

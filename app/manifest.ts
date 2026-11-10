@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { HERO_NAME } from "@/constants/hero-constants";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/constants/seo-constants";
 
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: SITE_TITLE,

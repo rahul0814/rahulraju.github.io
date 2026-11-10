@@ -55,15 +55,23 @@ export const useContactForm = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-        });
-        const data = (await response.json().catch(() => ({}))) as {
-          error?: string;
-        };
+        }).catch(() => null);
 
-        if (!response.ok) throw new Error(data.error || "Submission failed.");
-
-        setFormData(INITIAL_FORM_STATE);
-        showAlert("success", CONTACT_SUCCESS_MESSAGE);
+        if (response && response.ok) {
+          setFormData(INITIAL_FORM_STATE);
+          showAlert("success", CONTACT_SUCCESS_MESSAGE);
+        } else {
+          // Static hosting fallback (e.g. GitHub Pages)
+          const subject = encodeURIComponent(
+            `Portfolio Inquiry from ${formData.name}`
+          );
+          const body = encodeURIComponent(
+            `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+          );
+          window.location.href = `mailto:rahulraju0814@gmail.com?subject=${subject}&body=${body}`;
+          setFormData(INITIAL_FORM_STATE);
+          showAlert("success", "Message prepared! Opening your email app...");
+        }
       } catch (error) {
         showAlert(
           "danger",

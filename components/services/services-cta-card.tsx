@@ -10,17 +10,17 @@ export const ServicesCtaCard: FC = () => (
     className="glass gradient-border relative z-10 mt-24 flex flex-col items-start justify-between gap-6 p-8 md:flex-row md:items-center md:p-10"
   >
     <div>
-      <p className="text-eyebrow mb-2">Have a different idea?</p>
+      <p className="text-eyebrow mb-2">Custom Challenge?</p>
       <h3 className="text-2xl font-bold md:text-3xl">
-        Let&apos;s scope it together.
+        Have a different challenge?{" "}
+        <span className="text-gradient">Let&apos;s talk it through.</span>
       </h3>
       <p className="mt-2 max-w-xl text-neutral-400">
-        Send me a brief and I&apos;ll reply within 24 hours with a realistic plan,
-        timeline and price.
+        Whether you need custom CI/CD pipelines, multi-cloud Terraform modules, EKS cluster migrations, or cloud cost optimizations, reach out and let&apos;s build a resilient solution.
       </p>
     </div>
     <a href="#contact" className="btn-primary">
-      <span>Place an order</span>
+      <span>Get in touch</span>
       <span aria-hidden>→</span>
     </a>
   </motion.div>

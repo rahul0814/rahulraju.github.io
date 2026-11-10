@@ -38,8 +38,11 @@ export const ServiceCard: FC<ServiceCardProps> = ({
     >
       <motion.article
         style={{ scale, opacity }}
-        className="relative h-[80vh] overflow-hidden rounded-3xl border border-white/10 bg-midnight md:h-[78vh]"
+        className="relative h-[80vh] overflow-hidden rounded-3xl border border-white/[0.14] bg-midnight/80 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.15)] transition-all duration-500 hover:border-white/25 md:h-[78vh]"
       >
+        {/* Top border specular light sheen */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
         <div
           className={`absolute inset-0 bg-gradient-to-br opacity-30 ${
             SERVICE_ACCENTS[index % SERVICE_ACCENTS.length]
@@ -72,22 +75,13 @@ export const ServiceCard: FC<ServiceCardProps> = ({
           </div>
 
           <div className="flex flex-col justify-between gap-8 lg:col-span-5">
-            <div className="relative flex items-start justify-end">
-              <span className="text-[7rem] font-black leading-none tracking-tighter text-white/10 md:text-[10rem]">
+            <div className="flex items-center justify-end">
+              <span className="select-none text-[6rem] font-black leading-none tracking-tighter text-white/10 transition-colors duration-500 hover:text-white/20 md:text-[8.5rem]">
                 {padIndex(index + 1)}
               </span>
-              <div className="absolute right-0 top-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-md md:h-20 md:w-20">
-                <img
-                  src={service.icon}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  className="h-8 w-8 opacity-90 md:h-9 md:w-9"
-                />
-              </div>
             </div>
 
-            <ServiceBullets bullets={service.bullets} />
+            <ServiceBullets bullets={service.bullets} icon={service.icon} />
           </div>
         </div>
 

@@ -9,6 +9,7 @@ export const ProjectPanel: FC<ProjectPanelProps> = ({
   total,
   onOpen,
   showPreview,
+  onNavigate,
 }) => (
   <div className="flex h-screen w-screen shrink-0 items-center justify-center px-6 md:px-20">
     <div className="grid w-full max-w-7xl grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-14">
@@ -17,6 +18,7 @@ export const ProjectPanel: FC<ProjectPanelProps> = ({
         index={index}
         total={total}
         onOpen={onOpen}
+        onNavigate={onNavigate}
       />
       <ProjectPreview
         project={project}

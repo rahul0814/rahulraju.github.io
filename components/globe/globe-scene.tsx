@@ -15,19 +15,21 @@ import {
   ORBITS,
   SECTION_KEYS,
 } from "@/constants/globe-constants";
-import { createSpikeGeometry, planeBasis } from "@/helpers/globe-helpers";
+import { planeBasis } from "@/helpers/globe-helpers";
 import { clamp01, damp, smoothstep, type Damped } from "@/helpers/math-helpers";
 import { useGlobePath } from "@/hooks/use-globe-path";
 import { useGlobePostprocessing } from "@/hooks/use-globe-postprocessing";
 import {
+  useAtmosphereUniforms,
   useOrbUniforms,
-  useSpikeUniforms,
+  usePlanetUniforms,
+  useRingUniforms,
 } from "@/hooks/use-globe-uniforms";
 import { useNormalizedPointer } from "@/hooks/use-normalized-pointer";
 import { type GlobeKey, type GlobeSceneProps } from "@/types/globe-types";
 import { GlobeMeshes } from "./globe-meshes";
 
-export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
+export const GlobeScene: FC<GlobeSceneProps> = ({ paused, compact }) => {
   const dormant = useRef(false);
   const idleFrames = useRef(0);
 
@@ -35,7 +37,10 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
 
   const globe = useRef<Group>(null);
   const orbs = useRef<(Mesh | null)[]>([null, null, null, null]);
-  const spikeMaterial = useRef<ShaderMaterial>(null);
+  const planetMaterial = useRef<ShaderMaterial>(null);
+  const atmosphereMaterial = useRef<ShaderMaterial>(null);
+  const ringMaterial = useRef<ShaderMaterial>(null);
+
   const pointer = useNormalizedPointer();
   const elapsed = useRef(0);
   const intro = useRef(0);
@@ -44,6 +49,11 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
   const cursorWorld = useRef(new Vector3());
   const idleSpin = useRef(0);
   const scrollSpin = useRef<Damped>({ value: 0, velocity: 0 });
+
+  // Drag-to-turn momentum physics for turning the orbit
+  const isDragging = useRef(false);
+  const dragVelocity = useRef(0);
+  const dragSpin = useRef(0);
 
   const travel = useRef<Record<keyof GlobeKey, Damped>>({
     x: { value: SECTION_KEYS[0].x, velocity: 0 },
@@ -59,23 +69,17 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
   const camera = useThree((state) => state.camera);
   const size = useThree((state) => state.size);
 
-  const geometry = useMemo(
-    () => createSpikeGeometry(count, GLOBE.sphereRadius),
-    [count]
-  );
-  useEffect(() => () => geometry.dispose(), [geometry]);
-
   const bases = useMemo(
     () => ORBITS.map((orbit) => planeBasis(new Vector3(...orbit.axis))),
     []
   );
 
-  const spikeUniforms = useSpikeUniforms();
+  const planetUniforms = usePlanetUniforms();
+  const atmosphereUniforms = useAtmosphereUniforms();
+  const ringUniforms = useRingUniforms();
   const orbUniforms = useOrbUniforms();
 
-  // Reading window.scrollY inside the frame loop forces a style and layout
-  // recalculation on every frame, so the offset is cached from a passive
-  // scroll listener instead.
+  // Scroll tracking with passive listener
   const scrollY = useRef(0);
   useEffect(() => {
     const sync = () => {
@@ -87,6 +91,35 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
     return () => window.removeEventListener("scroll", sync);
   }, []);
 
+  // Drag interaction to turn the orbit with physics momentum
+  useEffect(() => {
+    let lastX = 0;
+    const onDown = (e: PointerEvent) => {
+      isDragging.current = true;
+      lastX = e.clientX;
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!isDragging.current) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      const deltaVelocity = dx * 0.0035;
+      dragVelocity.current = deltaVelocity;
+      dragSpin.current += deltaVelocity;
+    };
+    const onUp = () => {
+      isDragging.current = false;
+    };
+
+    window.addEventListener("pointerdown", onDown, { passive: true });
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerup", onUp, { passive: true });
+    return () => {
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, []);
+
   useFrame((_, delta) => {
     const step = Math.min(delta, 1 / 30);
     if (!paused) elapsed.current += step;
@@ -95,27 +128,36 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
     intro.current = Math.min(1, intro.current + step / GLOBE.introDuration);
     const eased = 1 - Math.pow(1 - intro.current, 3);
 
-    const uniforms = spikeMaterial.current?.uniforms;
-    if (uniforms) {
-      uniforms.u_breath.value = 1 + Math.sin(time * 0.6) * 0.02;
+    // Update procedural planet time and cloud layer
+    if (planetMaterial.current?.uniforms) {
+      planetMaterial.current.uniforms.u_time.value = time;
+    }
 
-      const orbPositions = uniforms.u_orbs.value as Vector3[];
-      for (let i = 0; i < ORBITS.length; i++) {
-        const orbit = ORBITS[i];
-        const { u, v } = bases[i];
-        const angle = orbit.dir * orbit.speed * time + orbit.phase;
-        const cos = Math.cos(angle);
-        const sin = Math.sin(angle);
+    // Drag inertia decay & continuous ring drift
+    if (!isDragging.current) {
+      dragVelocity.current *= Math.pow(0.92, step * 60);
+      dragSpin.current += dragVelocity.current;
+    }
 
-        orbPositions[i]
-          .set(
-            u.x * cos + v.x * sin,
-            u.y * cos + v.y * sin,
-            u.z * cos + v.z * sin
-          )
-          .multiplyScalar(orbit.radius);
-        orbs.current[i]?.position.copy(orbPositions[i]);
-      }
+    // Continuous orbital ring stream + spin acceleration
+    if (ringMaterial.current?.uniforms) {
+      const ringSpeed = step * 0.02 + dragVelocity.current * 0.12;
+      ringMaterial.current.uniforms.u_ringOffset.value += ringSpeed;
+    }
+
+    // Satellite orb orbital flight
+    for (let i = 0; i < ORBITS.length; i++) {
+      const orbit = ORBITS[i];
+      const { u, v } = bases[i];
+      const angle = orbit.dir * orbit.speed * time + orbit.phase;
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+
+      orbs.current[i]?.position.set(
+        (u.x * cos + v.x * sin) * orbit.radius,
+        (u.y * cos + v.y * sin) * orbit.radius,
+        (u.z * cos + v.z * sin) * orbit.radius
+      );
     }
 
     const sampled = pathTarget.current;
@@ -199,7 +241,7 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
 
     globe.current.rotation.x = GLOBE.baseTilt + tilt.current.x;
     globe.current.rotation.y =
-      idleSpin.current + scrollSpin.current.value + tilt.current.y;
+      idleSpin.current + scrollSpin.current.value + dragSpin.current + tilt.current.y;
     globe.current.scale.setScalar(fit * (0.6 + 0.4 * eased));
     globe.current.position.set(0, 0, 0);
 
@@ -208,8 +250,8 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
     idleFrames.current = showing ? 0 : idleFrames.current + 1;
     dormant.current = idleFrames.current > 2;
 
-    if (uniforms) {
-      uniforms.u_hover.value = hover.current;
+    if (planetMaterial.current?.uniforms) {
+      planetMaterial.current.uniforms.u_hover.value = hover.current;
 
       globe.current.updateMatrixWorld();
       cursorWorld.current.set(
@@ -218,7 +260,9 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
         worldRadius
       );
       globe.current.worldToLocal(cursorWorld.current);
-      (uniforms.u_cursor.value as Vector3).copy(cursorWorld.current);
+      (planetMaterial.current.uniforms.u_cursor.value as Vector3).copy(
+        cursorWorld.current
+      );
     }
 
     const orbBoost = 1.05 + hover.current * 0.45;
@@ -231,10 +275,13 @@ export const GlobeScene: FC<GlobeSceneProps> = ({ count, paused, compact }) => {
   return (
     <group ref={globe}>
       <GlobeMeshes
-        geometry={geometry}
-        spikeMaterial={spikeMaterial}
+        planetMaterial={planetMaterial}
+        atmosphereMaterial={atmosphereMaterial}
+        ringMaterial={ringMaterial}
         orbs={orbs}
-        spikeUniforms={spikeUniforms}
+        planetUniforms={planetUniforms}
+        atmosphereUniforms={atmosphereUniforms}
+        ringUniforms={ringUniforms}
         orbUniforms={orbUniforms}
       />
     </group>

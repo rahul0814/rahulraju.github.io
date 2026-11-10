@@ -35,27 +35,29 @@ const TimelineItem: FC<{ item: Experience; index: number }> = ({
         </div>
       </div>
       <div className="relative w-full pl-20 pr-4 md:pl-4">
-        <div className="block mb-4 text-2xl font-bold text-left text-neutral-300 md:hidden">
-          <h3 className="text-gradient text-base mb-1">{item.date}</h3>
-          <h3 className="text-xl">{item.title}</h3>
-          <h3 className="text-base text-neutral-500">{item.job}</h3>
-        </div>
-        <div className="space-y-3">
-          {item.contents.map((content, contentIndex) => (
-            <motion.p
-              key={contentIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.05 + 0.25 + contentIndex * 0.08,
-              }}
-              className="font-normal text-neutral-400 flex gap-3"
-            >
-              <span className="mt-2 h-1 w-1 rounded-full bg-coral flex-shrink-0" />
-              <span>{content}</span>
-            </motion.p>
-          ))}
+        <div className="glass gradient-border p-6 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)] transition-all duration-300 hover:border-white/25 hover:bg-white/[0.05] md:p-8">
+          <div className="block mb-4 text-2xl font-bold text-left text-neutral-300 md:hidden">
+            <h3 className="text-gradient text-base mb-1">{item.date}</h3>
+            <h3 className="text-xl">{item.title}</h3>
+            <h3 className="text-base text-neutral-500">{item.job}</h3>
+          </div>
+          <div className="space-y-3">
+            {item.contents.map((content, contentIndex) => (
+              <motion.p
+                key={contentIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.05 + 0.25 + contentIndex * 0.08,
+                }}
+                className="font-normal text-neutral-300 flex items-start gap-3 text-sm md:text-base leading-relaxed"
+              >
+                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gradient-to-r from-coral to-lavender flex-shrink-0 shadow-[0_0_8px_rgba(234,72,132,0.8)]" />
+                <span>{content}</span>
+              </motion.p>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -108,7 +110,8 @@ export const Timeline: FC<TimelineProps> = ({ data }) => {
         transition={{ duration: 0.7, delay: 0.05 }}
         className="text-heading mt-3 max-w-3xl"
       >
-        A track record of <span className="text-gradient">shipping & leading.</span>
+        A track record of{" "}
+        <span className="text-gradient">shipping &amp; scaling.</span>
       </motion.h2>
 
       <div ref={ref} className="relative pb-20 mt-8">

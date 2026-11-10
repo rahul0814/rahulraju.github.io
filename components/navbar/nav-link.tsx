@@ -21,19 +21,23 @@ export const NavLink: FC<NavLinkProps> = ({
   };
 
   return (
-    <li className="nav-li relative">
+    <li className="relative">
       <a
         href={href}
         onClick={handleClick}
         aria-current={active ? "page" : undefined}
-        className={`nav-link relative ${active ? "text-white" : ""}`}
+        className={`relative block rounded-full px-3.5 py-1.5 text-xs font-medium uppercase tracking-wider transition-all duration-300 md:text-sm md:tracking-normal md:capitalize ${
+          active
+            ? "text-white"
+            : "text-white/65 hover:text-white hover:bg-white/[0.06]"
+        }`}
       >
         {label}
         {active && (
           <motion.span
             layoutId="active-nav"
             transition={SPRING_SNAPPY}
-            className="absolute -bottom-1 left-0 right-0 mx-auto h-px w-6 bg-gradient-to-r from-coral to-lavender"
+            className="absolute inset-0 -z-10 rounded-full border border-white/20 bg-white/[0.12] shadow-[0_0_20px_rgba(122,87,219,0.35),inset_0_1px_1px_rgba(255,255,255,0.2)]"
           />
         )}
       </a>

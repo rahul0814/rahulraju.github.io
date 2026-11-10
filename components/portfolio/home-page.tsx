@@ -7,7 +7,6 @@ import { About } from "@/components/sections/about";
 import { Services } from "@/components/sections/services";
 import { Projects } from "@/components/sections/projects";
 import { Experiences } from "@/components/sections/experiences";
-import { Testimonial } from "@/components/sections/testimonial";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { PageLoader } from "@/components/portfolio/page-loader";
@@ -24,7 +23,6 @@ export const HomePage: FC = () => (
       <Services />
       <Projects />
       <Experiences />
-      <Testimonial />
       <Contact />
       <Footer />
     </div>

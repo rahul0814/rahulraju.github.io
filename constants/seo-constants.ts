@@ -2,7 +2,7 @@ import { HERO_LOCATION, HERO_NAME, HERO_ROLE } from "./hero-constants";
 import { CONTACT_EMAIL, MY_SOCIALS } from "./social-constants";
 
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.hasnainirfan.com"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rahul0814.github.io"
 ).replace(/\/$/, "");
 
 export const absoluteUrl = (path: string) =>
@@ -10,13 +10,13 @@ export const absoluteUrl = (path: string) =>
 
 export const SITE_NAME = `${HERO_NAME} | ${HERO_ROLE}`;
 
-export const SITE_TITLE = `${HERO_NAME} | ${HERO_ROLE}`;
+export const SITE_TITLE = "Rahul R | Senior DevOps Engineer | AWS, Azure & Cloud Automation";
 
 export const SITE_DESCRIPTION =
-  "Senior Software Engineer with 5+ years building scalable web and mobile products in React, Next.js and Node.js. Open to freelance and contract work.";
+  "Rahul R is a Senior DevOps Engineer based in Chennai, India, specializing in AWS, Azure, Kubernetes, Terraform, CI/CD automation, Databricks, and secure cloud infrastructure.";
 
 export const SITE_TAGLINE =
-  "Scalable web & mobile products built with React, Next.js and Node.js.";
+  "Designing, deploying, and operating secure, scalable, and cost-efficient cloud platforms across AWS and Azure.";
 
 export const OG_IMAGE = "/og.jpg";
 export const OG_IMAGE_ALT = `${HERO_NAME}, ${HERO_ROLE} portfolio`;
@@ -35,27 +35,26 @@ export const GOOGLE_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "";
 
 export const SITE_KEYWORDS = [
+  "Senior DevOps Engineer Chennai",
+  "AWS DevOps Engineer",
+  "Azure DevOps Engineer",
+  "Kubernetes",
+  "Amazon EKS",
+  "Terraform",
+  "Jenkins",
+  "GitHub Actions",
+  "Databricks",
+  "Cloud Infrastructure",
+  "CI/CD Automation",
+  "Cloud Cost Optimization",
   HERO_NAME,
-  "Software Engineer",
-  "Senior Software Engineer",
-  "Full Stack Developer",
-  "Next.js Developer",
-  "React Developer",
-  "React Native Developer",
-  "Node.js Developer",
-  "Frontend Developer",
-  "Web Developer Portfolio",
-  "Freelance Developer",
-  "Hire Software Engineer",
+  HERO_ROLE,
   HERO_LOCATION,
-  "Pakistan",
-  "Remote Developer",
 ];
 
-export const HOME_TITLE = `${HERO_NAME} | ${HERO_ROLE} & Next.js Developer`;
+export const HOME_TITLE = SITE_TITLE;
 
-export const HOME_DESCRIPTION =
-  "Senior Software Engineer in Karachi building scalable web, mobile and API products with React, Next.js and Node.js. Open to freelance and contract work.";
+export const HOME_DESCRIPTION = SITE_DESCRIPTION;
 
 export const ADMIN_TITLE = "Contact submissions";
 
@@ -71,34 +70,34 @@ export const SITE_SECTIONS = [
   {
     name: "Home",
     hash: "#home",
-    description: `${HERO_NAME}, ${HERO_ROLE} building scalable web and mobile products.`,
+    description: `${HERO_NAME}, ${HERO_ROLE} building and engineering reliable cloud platforms.`,
   },
   {
     name: "About",
     hash: "#about",
-    description: `Background, stack and working style of ${HERO_NAME}, a ${HERO_ROLE} based in ${HERO_LOCATION}.`,
+    description: `Background, stack and technical expertise of ${HERO_NAME}, a ${HERO_ROLE} based in ${HERO_LOCATION}.`,
   },
   {
     name: "Services",
     hash: "#services",
     description:
-      "Web applications, cross-platform mobile apps, APIs and technical consulting for startups and product teams.",
+      "CI/CD release pipelines, Terraform infrastructure as code, Kubernetes on Amazon EKS, and cloud cost optimization.",
   },
   {
     name: "Work",
     hash: "#work",
     description:
-      "Selected projects and case studies built with React, Next.js, React Native and Node.js.",
+      "Platforms built and automated across Databricks, FinOps, Serverless AWS, and Multi-Cloud Terraform.",
   },
   {
-    name: "Testimonials",
-    hash: "#testimonials",
-    description: `What clients and teammates say about working with ${HERO_NAME}.`,
+    name: "Experience",
+    hash: "#experience",
+    description: `Career timeline and track record of ${HERO_NAME} at Agilisium, IDC Technologies Solutions, and Accenture.`,
   },
   {
     name: "Contact",
     hash: "#contact",
-    description: `Get in touch with ${HERO_NAME} about freelance, contract or full-time work.`,
+    description: `Get in touch with ${HERO_NAME} for DevOps, cloud infrastructure, and platform engineering opportunities.`,
   },
 ] as const;
 

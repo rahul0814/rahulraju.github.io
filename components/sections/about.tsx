@@ -4,7 +4,7 @@ import { useRef, type FC } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { AboutBio } from "@/components/about/about-bio";
 import { AboutStatCard } from "@/components/about/about-stat-card";
-import { SkillsMarquee } from "@/components/about/skills-marquee";
+import { TechStack } from "@/components/about/tech-stack";
 import { SectionHeader } from "@/components/ui/section-header";
 import { STATS } from "@/constants/hero-constants";
 
@@ -40,8 +40,8 @@ export const About: FC = () => {
         eyebrow="About"
         title={
           <>
-            Engineering products that{" "}
-            <span className="text-gradient">people actually use.</span>
+            Building cloud platforms{" "}
+            <span className="text-gradient">teams can trust.</span>
           </>
         }
       />
@@ -55,7 +55,7 @@ export const About: FC = () => {
         </div>
       </div>
 
-      <SkillsMarquee />
+      <TechStack />
     </section>
   );
 };

@@ -13,7 +13,6 @@ import { revealProps } from "@/animations/scroll-animations";
 import { SPRING_SOFT, swapLabel } from "@/animations/ui-animations";
 import { useContactForm } from "@/hooks/use-contact-form";
 import { Alert } from "@/components/portfolio/alert";
-import { BudgetField } from "./budget-field";
 import { FloatingField } from "./floating-field";
 
 export const ContactForm: FC = () => {
@@ -44,7 +43,7 @@ export const ContactForm: FC = () => {
           pointerX.set(((event.clientX - bounds.left) / bounds.width) * 100);
           pointerY.set(((event.clientY - bounds.top) / bounds.height) * 100);
         }}
-        className="glass gradient-border relative overflow-hidden p-7 md:p-10 lg:col-span-7"
+        className="glass-strong gradient-border relative overflow-hidden p-7 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.12)] md:p-10 lg:col-span-7"
       >
         <motion.div
           aria-hidden
@@ -54,7 +53,7 @@ export const ContactForm: FC = () => {
 
         <div className="relative mb-7 flex items-end justify-between gap-6">
           <div>
-            <p className="text-eyebrow">Place an order</p>
+            <p className="text-eyebrow">Get in touch</p>
             <h3 className="mt-1 text-xl font-bold md:text-2xl">
               Tell me about your project
             </h3>
@@ -96,14 +95,9 @@ export const ContactForm: FC = () => {
             />
           </div>
 
-          <BudgetField
-            value={formData.budget}
-            onChange={(value) => update("budget", value)}
-          />
-
           <FloatingField
             id="message"
-            label="What are you building?"
+            label="What are you building or looking to scale?"
             value={formData.message}
             onChange={(value) => update("message", value)}
             required

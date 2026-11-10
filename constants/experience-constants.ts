@@ -1,36 +1,55 @@
 import { type Experience } from "@/types/portfolio-types";
 
+export const EXPERIENCE_HEADING = "A track record of shipping & scaling.";
+
 export const EXPERIENCES: Experience[] = [
   {
-    title: "Senior Software Engineer",
-    job: "Getweys · Karachi",
-    date: "2023 - Present",
+    title: "Senior DevOps Engineer",
+    job: "Agilisium · Chennai, India",
+    date: "July 2025 – Present",
     contents: [
-      "Designing and delivering scalable web applications using React, Next.js and Node.js.",
-      "Leading cross-functional collaboration and shipping projects ahead of deadlines.",
-      "Contributing to architecture decisions that keep codebases scalable and maintainable.",
-      "Mentoring and upskilling team members, lifting overall productivity and code quality.",
+      "Administered Databricks workspaces and managed RBAC and access governance.",
+      "Developed and maintained Jenkins, GitHub Actions, and Azure DevOps pipelines across Dev, Test, UAT, and Production.",
+      "Provisioned AWS and Azure infrastructure using Terraform.",
+      "Managed Kubernetes and Amazon EKS deployments and operations.",
+      "Implemented serverless architectures using Lambda, API Gateway, S3, and EventBridge.",
+      "Managed infrastructure security using IAM, WAF, and CloudTrail.",
+      "Reduced monthly cloud costs by approximately 20% using Cost Explorer and Compute Optimizer.",
+      "Implemented Boomi and Databricks Model Serving CI/CD workflows.",
     ],
   },
   {
-    title: "Junior Team Lead",
-    job: "Digital Graphiks · Karachi",
-    date: "Feb 2023 - Jun 2023",
+    title: "DevOps Engineer",
+    job: "Agilisium · Chennai, India",
+    date: "August 2022 – June 2025",
     contents: [
-      "Led a team of developers to deliver complex projects on time with React, Next.js and Node.js.",
-      "Streamlined workflows and code review standards across teams.",
-      "Debugged and resolved production issues quickly to keep products running smoothly.",
-      "Mentored junior developers and grew the team's overall skillset.",
+      "Designed and maintained highly available AWS infrastructure.",
+      "Built optimized Docker images and deployed microservices on Amazon EKS.",
+      "Developed reusable Terraform modules for infrastructure provisioning.",
+      "Implemented infrastructure backup and disaster recovery strategies.",
+      "Configured cross-region replication and S3 lifecycle management policies.",
     ],
   },
   {
-    title: "Front-End Developer",
-    job: "Lucid Web Solution · Karachi",
-    date: "Sep 2022 - Feb 2023",
+    title: "Application Support Engineer",
+    job: "IDC Technologies Solutions",
+    date: "February 2021 – August 2022",
     contents: [
-      "Built responsive, accessible UIs that improved user satisfaction.",
-      "Developed dynamic web apps using React, Next.js, JavaScript, HTML and CSS.",
-      "Integrated REST APIs and dynamic data visualisation to enhance interactivity.",
+      "Implemented Grafana monitoring and application health visibility.",
+      "Performed incident root cause analysis and application smoke testing.",
+      "Managed SLA-driven incident resolution.",
+      "Collaborated with development teams, QA teams, and external vendors.",
+    ],
+  },
+  {
+    title: "Associate",
+    job: "Accenture · Chennai, India",
+    date: "July 2019 – February 2021",
+    contents: [
+      "Managed Windows infrastructure for enterprise users.",
+      "Administered Active Directory and Group Policy.",
+      "Supported Microsoft 365 administration.",
+      "Managed system patching and infrastructure maintenance.",
     ],
   },
 ];

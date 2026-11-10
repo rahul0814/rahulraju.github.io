@@ -8,8 +8,8 @@ export const ProjectsHeader: FC<{ total: number }> = ({ total }) => (
       eyebrow={`Selected Work · ${padIndex(total)}`}
       title={
         <>
-          Projects that{" "}
-          <span className="text-gradient">shipped &amp; scaled.</span>
+          Platforms I&apos;ve built &amp;{" "}
+          <span className="text-gradient">automated.</span>
         </>
       }
       hint={["Scroll", "Pinned"]}

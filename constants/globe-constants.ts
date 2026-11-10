@@ -26,12 +26,12 @@ export const GLOBE = {
   compactDrop: -0.15,
   compactScale: 0.82,
 
-  idleSpin: 0.075,
-  scrollYaw: 0.00006,
+  idleSpin: 0.06,
+  scrollYaw: 0.0016,
   yawStiffness: 3.5,
   baseTilt: -0.22,
-  pointerTiltX: 0.12,
-  pointerTiltY: 0.16,
+  pointerTiltX: 0.22,
+  pointerTiltY: 0.26,
 
   hoverRadius: 1.45,
   hoverBulge: 0.4,
@@ -67,11 +67,11 @@ export const SECTION_KEYS: SectionKey[] = [
   { id: "services", at: 0.5, x: 0.47, y: -0.3, scale: 1.0, presence: 1 },
   { id: "services", at: 1, ...DIP },
 
-  { id: "work", at: 0.5, x: -0.46, y: -0.34, scale: 1.14, presence: 1 },
+  { id: "work", at: 0.5, x: 0.38, y: -0.06, scale: 1.52, presence: 1 },
   { id: "work", at: 1, ...DIP },
 
-  { id: "testimonials", at: 0.5, x: 0.46, y: -0.31, scale: 1.02, presence: 1 },
-  { id: "testimonials", at: 1, ...DIP },
+  { id: "experience", at: 0.5, x: 0.46, y: -0.31, scale: 1.02, presence: 1 },
+  { id: "experience", at: 1, ...DIP },
 
   { id: "contact", at: 0.5, x: -0.47, y: -0.33, scale: 1.1, presence: 1 },
 ];

@@ -4,10 +4,21 @@ import { type FC } from "react";
 import { motion } from "motion/react";
 import { Marquee } from "@/components/portfolio/marquee";
 import { MARQUEE, SKILL_CHIP_CLASS } from "@/constants/about-constants";
-import { SKILL_CHIPS } from "@/constants/skills-constants";
+import { SKILLS, type SkillItem } from "@/constants/skills-constants";
 
-const Chip: FC<{ skill: string }> = ({ skill }) => (
-  <span className={SKILL_CHIP_CLASS}>{skill}</span>
+const Chip: FC<{ skill: SkillItem }> = ({ skill }) => (
+  <span className={SKILL_CHIP_CLASS}>
+    {skill.icon && (
+      <img
+        src={skill.icon}
+        alt=""
+        aria-hidden="true"
+        className="h-5 w-5 object-contain flex-shrink-0"
+        loading="lazy"
+      />
+    )}
+    <span>{skill.name}</span>
+  </span>
 );
 
 export const SkillsMarquee: FC = () => (
@@ -25,14 +36,14 @@ export const SkillsMarquee: FC = () => (
 
     <div className="relative overflow-hidden">
       <Marquee className={MARQUEE.forward} pauseOnHover>
-        {SKILL_CHIPS.map((skill) => (
-          <Chip key={skill} skill={skill} />
+        {SKILLS.map((skill) => (
+          <Chip key={skill.name} skill={skill} />
         ))}
       </Marquee>
 
       <Marquee reverse className={MARQUEE.reverse} pauseOnHover>
-        {[...SKILL_CHIPS].reverse().map((skill) => (
-          <Chip key={`reverse-${skill}`} skill={skill} />
+        {[...SKILLS].reverse().map((skill) => (
+          <Chip key={`reverse-${skill.name}`} skill={skill} />
         ))}
       </Marquee>
 

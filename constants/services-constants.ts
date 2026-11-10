@@ -1,52 +1,54 @@
 import { type Service } from "@/types/portfolio-types";
 
+export const SERVICES_HEADING = "What I can do for your team.";
+
 export const SERVICES: Service[] = [
   {
     id: 1,
-    title: "Web Applications",
+    title: "CI/CD Automation",
     description:
-      "Production-grade Next.js & React apps that are fast, accessible, SEO-friendly and built to scale.",
-    icon: "/assets/logos/react.svg",
+      "Enterprise-grade release automation with end-to-end testing, governance gates, and multi-environment orchestration.",
+    icon: "/assets/icons/jenkins.svg",
     bullets: [
-      "Landing pages & marketing sites",
-      "Dashboards & SaaS platforms",
-      "Server rendering & edge runtime",
+      "Multi-environment release pipelines.",
+      "Automated validation and approvals.",
+      "Boomi and Databricks deployments.",
     ],
   },
   {
     id: 2,
-    title: "Mobile Apps",
+    title: "Cloud Infrastructure as Code",
     description:
-      "Cross-platform mobile apps with React Native + Expo, polished UI and native-grade performance.",
-    icon: "/assets/logos/react.svg",
+      "Scalable, resilient multi-cloud architecture provisioned declaratively with reusable, versioned Terraform modules.",
+    icon: "/assets/icons/terraform.svg",
     bullets: [
-      "iOS & Android from one codebase",
-      "Push notifications & deep links",
-      "Offline-first patterns",
+      "VPC, EC2, RDS, S3, and CloudFront.",
+      "Azure App Service and Key Vault.",
+      "Reusable, versioned infrastructure modules.",
     ],
   },
   {
     id: 3,
-    title: "Admin Panels & CMS",
+    title: "Containers & Kubernetes",
     description:
-      "Powerful internal tools and admin portals with reusable components and role-based access.",
-    icon: "/assets/logos/tailwindcss.svg",
+      "Production container workloads engineered for high availability, zero-downtime rollouts, and optimized resource footprint.",
+    icon: "/assets/icons/kubernetes.svg",
     bullets: [
-      "Bespoke admin dashboards",
-      "Data tables, filters & exports",
-      "Auth, roles & permissions",
+      "Dockerfile and container image optimization.",
+      "Amazon EKS deployments.",
+      "Cluster health monitoring and troubleshooting.",
     ],
   },
   {
     id: 4,
-    title: "APIs & Backends",
+    title: "Security, Monitoring & Cost",
     description:
-      "Robust Node.js / Express APIs with SQL or MongoDB, cron jobs, and clean integration patterns.",
-    icon: "/assets/logos/javascript.svg",
+      "Full-stack observability, cloud posture compliance, and FinOps practices that reduce recurring cloud expenditure.",
+    icon: "/assets/icons/aws-cloudwatch.svg",
     bullets: [
-      "REST API design & docs",
-      "Database modelling (SQL & NoSQL)",
-      "Background jobs & webhooks",
+      "IAM, WAF, NACLs, and CloudTrail.",
+      "CloudWatch, Splunk, and Grafana alerts.",
+      "Cost Explorer and Compute Optimizer.",
     ],
   },
 ];

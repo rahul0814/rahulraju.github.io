@@ -39,7 +39,7 @@ export const PageLoader: FC = () => {
         <div className="reveal-pop relative">
           <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-royal/40 to-coral/40 blur-2xl" />
           <span className="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-royal to-coral text-3xl font-black text-white shadow-2xl shadow-coral/30 md:h-20 md:w-20 md:text-4xl">
-            H
+            R
           </span>
         </div>
 
@@ -61,7 +61,7 @@ export const PageLoader: FC = () => {
           className="reveal mt-3 text-[10px] uppercase tracking-[0.4em] text-neutral-400 md:text-xs"
           style={{ animationDelay: "0.16s" }}
         >
-          Software Engineer · Building scalable products
+          DevOps Engineer · Building reliable cloud platforms
         </p>
 
         <div

@@ -3,6 +3,8 @@ import {
   type ContactFormData,
 } from "@/types/contact-types";
 
+export const CONTACT_HEADING = "Need reliable cloud? Let's build it.";
+
 export const INITIAL_FORM_STATE: ContactFormData = {
   name: "",
   email: "",

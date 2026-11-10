@@ -6,6 +6,7 @@ export interface ProjectPanelProps {
   total: number;
   onOpen: () => void;
   showPreview: boolean;
+  onNavigate?: (targetIndex: number) => void;
 }
 
 export type ProjectSummaryProps = Omit<ProjectPanelProps, "showPreview">;

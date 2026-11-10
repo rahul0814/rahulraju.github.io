@@ -5,7 +5,10 @@ import { FlipWords } from "@/components/portfolio/flip-words";
 import {
   FLIP_WORDS,
   HERO_NAME,
-  HERO_ROLE,
+  HERO_STATUS,
+  HERO_SENTENCE_PREFIX,
+  HERO_SENTENCE_SUFFIX,
+  RESUME_URL,
 } from "@/constants/portfolio-constants";
 
 const delay = (seconds: number): CSSProperties => ({
@@ -17,15 +20,15 @@ export const HeroText: FC = () => {
     <div className="z-10 mt-24 text-center md:mt-32 md:text-left max-w-3xl">
       <div className="flex-col hidden md:flex c-space">
         <div
-          className="reveal inline-flex items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md px-3 py-1.5 mb-6"
+          className="reveal inline-flex items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md px-3.5 py-1.5 mb-6"
           style={delay(0.05)}
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inset-0 rounded-full bg-mint animate-ping opacity-75" />
             <span className="relative rounded-full bg-mint h-2 w-2" />
           </span>
-          <span className="text-xs tracking-[0.25em] uppercase text-neutral-300">
-            Available for new projects
+          <span className="text-xs tracking-[0.2em] uppercase text-neutral-300 font-medium">
+            {HERO_STATUS}
           </span>
         </div>
 
@@ -37,11 +40,10 @@ export const HeroText: FC = () => {
         </h1>
 
         <p
-          className="reveal text-5xl lg:text-6xl font-bold mt-2 text-gradient leading-tight"
+          className="reveal text-4xl lg:text-5xl font-bold mt-2 text-gradient leading-tight"
           style={delay(0.19)}
         >
-          {HERO_ROLE} <br />
-          crafting
+          {HERO_SENTENCE_PREFIX}
         </p>
 
         <div className="reveal" style={delay(0.26)}>
@@ -55,46 +57,55 @@ export const HeroText: FC = () => {
           className="reveal text-3xl lg:text-4xl font-semibold text-neutral-300"
           style={delay(0.33)}
         >
-          web & mobile products.
+          {HERO_SENTENCE_SUFFIX}
         </p>
 
         <div className="reveal flex flex-wrap gap-4 mt-10" style={delay(0.4)}>
           <a href="#contact" className="btn-primary">
-            <span>Hire Me</span>
+            <span>Get in touch</span>
             <span aria-hidden>→</span>
           </a>
           <a href="#work" className="btn-ghost">
-            <span>View My Work</span>
+            <span>See my work</span>
+          </a>
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost"
+          >
+            <span>Resume</span>
+            <span aria-hidden>↗</span>
           </a>
         </div>
       </div>
 
-      <div className="flex flex-col space-y-5 md:hidden px-2">
+      <div className="flex flex-col space-y-5 md:hidden px-4">
         <div
-          className="reveal inline-flex self-center items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5"
+          className="reveal inline-flex self-center items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1.5 text-center"
           style={delay(0.05)}
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2 w-2 flex-shrink-0">
             <span className="absolute inset-0 rounded-full bg-mint animate-ping opacity-75" />
             <span className="relative rounded-full bg-mint h-2 w-2" />
           </span>
-          <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-300">
-            Open for Work
+          <span className="text-[11px] tracking-[0.15em] uppercase text-neutral-300 font-medium">
+            {HERO_STATUS}
           </span>
         </div>
 
         <p
-          className="reveal text-3xl font-light text-neutral-400"
+          className="reveal text-2xl font-light text-neutral-400"
           style={delay(0.12)}
         >
-          Hi, I&apos;m {HERO_NAME.split(" ")[0]}
+          Hi, I&apos;m {HERO_NAME}
         </p>
 
         <p
-          className="reveal text-4xl font-bold text-gradient"
+          className="reveal text-3xl font-bold text-gradient"
           style={delay(0.19)}
         >
-          {HERO_ROLE}
+          {HERO_SENTENCE_PREFIX}
         </p>
 
         <div className="reveal" style={delay(0.26)}>
@@ -105,22 +116,31 @@ export const HeroText: FC = () => {
         </div>
 
         <p
-          className="reveal text-3xl font-semibold text-neutral-300"
+          className="reveal text-2xl font-semibold text-neutral-300"
           style={delay(0.33)}
         >
-          web & mobile apps.
+          {HERO_SENTENCE_SUFFIX}
         </p>
 
         <div
-          className="reveal flex flex-col gap-3 mt-4 items-center"
+          className="reveal flex flex-col gap-3 mt-4 items-center w-full"
           style={delay(0.4)}
         >
           <a href="#contact" className="btn-primary w-full">
-            <span>Hire Me</span>
+            <span>Get in touch</span>
             <span aria-hidden>→</span>
           </a>
           <a href="#work" className="btn-ghost w-full">
-            <span>View My Work</span>
+            <span>See my work</span>
+          </a>
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost w-full"
+          >
+            <span>Resume</span>
+            <span aria-hidden>↗</span>
           </a>
         </div>
       </div>

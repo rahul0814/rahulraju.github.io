@@ -1,19 +1,27 @@
 import { type Stat } from "@/types/portfolio-types";
 
-export const HERO_NAME = "Hasnain Irfan";
+export const HERO_NAME = "Rahul R";
 
-export const HERO_ROLE = "Senior Software Engineer";
+export const HERO_ROLE = "Senior DevOps Engineer";
 
-export const HERO_LOCATION = "Karachi, Pakistan";
+export const HERO_LOCATION = "Chennai, India";
+
+export const HERO_STATUS = "Senior DevOps Engineer at Agilisium";
+
+export const HERO_SENTENCE_PREFIX = "Engineering and building";
+export const HERO_SENTENCE_SUFFIX = "cloud platforms.";
 
 export const HERO_TAGLINE =
-  "I architect scalable web & mobile products with React, Next.js and Node.js, turning complex ideas into shipped, revenue-ready software.";
+  "Designing, deploying, and operating secure, scalable, and cost-efficient cloud platforms across AWS and Azure.";
 
-export const FLIP_WORDS = ["Scalable", "Modern", "Reliable"];
+export const FLIP_WORDS = ["Scalable", "Secure", "Automated", "Reliable"];
+
+export const RESUME_URL =
+  "https://drive.google.com/file/d/1TKfBpgg4ZDDX4ho0O-zGJo1x6QhKlb8h/view";
 
 export const STATS: Stat[] = [
-  { value: "5+", label: "Years building products" },
-  { value: "20+", label: "Shipped projects" },
-  { value: "1k+", label: "End users served" },
-  { value: "40%", label: "Avg. productivity lift" },
+  { value: "6.4", label: "Years of hands-on experience" },
+  { value: "15", label: "Databricks workspaces managed" },
+  { value: "~20%", label: "Monthly cloud cost reduction" },
+  { value: "5", label: "Professional certifications" },
 ];

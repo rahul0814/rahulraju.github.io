@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+
+Host: https://rahul0814.github.io
+Sitemap: https://rahul0814.github.io/sitemap.xml
